@@ -174,4 +174,3 @@ metrics:
     relevant_columns:
       - fact_order.order_quantity
     alias: [平均单价, 平均订单金额]
-
