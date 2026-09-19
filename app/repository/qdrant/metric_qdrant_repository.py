@@ -28,3 +28,11 @@ class MetricQdrantRepository:
             collection_name= self.collection_name,
             points=points
         )
+
+    async def search(self, embedding: list[float], score_threshold: float = 0.6, limit: int = 5) -> list[
+        MetricInfo]:
+        result = await self.client.query_points(collection_name=self.collection_name,
+                                                query=embedding,
+                                                score_threshold=score_threshold,
+                                                limit=limit)
+        return [MetricInfo(**point.payload) for point in result.points]

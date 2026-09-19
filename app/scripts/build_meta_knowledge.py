@@ -10,7 +10,7 @@ from app.clients.mysql_client_manager import (
 )
 from app.clients.qdrant_client_manager import qdrant_client_manager
 from app.repository.qdrant.column_qdrant_repository import ColumnQdrantRepository
-from app.repository.mysql.dw.dw_mysql_repository import DWMySQLRepository
+from app.repository.mysql.dw.dw_mysql_repository import DWMysqlRepository
 from app.repository.mysql.meta.meta_mysql_repository import MetaMySQLRepository
 from app.repository.es.value_es_repository import ValueESRepository
 from app.repository.qdrant.metric_qdrant_repository import MetricQdrantRepository
@@ -30,7 +30,7 @@ async def build(config_path: Path):
         meta_mysql_repository = MetaMySQLRepository(
             meta_session
         )  # 创建元数据MySQLRepo实例
-        dw_mysql_repository = DWMySQLRepository(dw_session)  # 创建数据仓库MySQLRepo实例
+        dw_mysql_repository = DWMysqlRepository(dw_session)  # 创建数据仓库MySQLRepo实例
         column_qdrant_repository = ColumnQdrantRepository(
             qdrant_client_manager.client
         )  # 创建列QdrantRepo实例
