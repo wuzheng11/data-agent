@@ -39,3 +39,6 @@ class ValueESRepository:
                                           min_score=score_threshold,
                                           size=limit)
         return [ValueInfo(**hit['_source']) for hit in result['hits']['hits']]
+    async def ensure_index(self):
+        if not await self.client.indices.exists(index=self.index_name):
+            await self.client.indices.create(index=self.index_name, mappings=self.index_mappings)

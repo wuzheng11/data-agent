@@ -52,6 +52,7 @@ async def build(config_path: Path):
         )  # 创建MetaKnowledgeService实例
         await mete_knowledge_service.build(config_path)  # 构建元知识库
 
+    await meta_session.commit()
     await meta_mysql_client_manager.close()  # 关闭元数据MySQL客户端
     await dw_mysql_client_manager.close()  # 关闭数据仓库MySQL客户端
     await qdrant_client_manager.close()  # 关闭Qdrant客户端

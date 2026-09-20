@@ -36,3 +36,17 @@ class MetricQdrantRepository:
                                                 score_threshold=score_threshold,
                                                 limit=limit)
         return [MetricInfo(**point.payload) for point in result.points]
+    # async def upsert(self,ids:list[str], embeddings:list[list[float]], payloads:list[MetricInfo]):
+    #
+    #     zipped=list(zip(ids,embeddings,payloads))
+    #     for i in range(0,len(zipped),batch_size):
+
+    async def upsert(self, ids: list[str], embeddings: list[list[float]], payloads: list[MetricInfo],
+                     batch_size: int = 20):
+        zipped = list(zip(ids, embeddings, payloads))
+        for i in range(0, len(zipped), batch_size):
+            batch = zipped[i:i + batch_size]
+            batch_points = [PointStruct(id=id, vector=embedding, payload=asdict(payload)) for
+                            id, embedding, payload in
+                            batch]
+            await self.client.upsert(collection_name=self.collection_name, points=batch_points)

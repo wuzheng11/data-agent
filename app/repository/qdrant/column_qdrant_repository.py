@@ -31,6 +31,15 @@ class ColumnQdrantRepository:
                 points = points[i:i+batch_size]
             )
 
+    async def upsert(self, ids: list[str], embeddings: list[list[float]], payloads: list[ColumnInfo],
+                     batch_size: int = 20):
+        zipped = list(zip(ids, embeddings, payloads))
+        for i in range(0, len(zipped), batch_size):
+            batch = zipped[i:i + batch_size]
+            batch_points = [PointStruct(id=id, vector=embedding, payload=asdict(payload)) for id, embedding, payload in
+                            batch]
+            await self.client.upsert(collection_name=self.collection_name, points=batch_points)
+
     async def search(self,embedding:list[float],score_threshold:float=0.6,limit:int =5)->list[ColumnInfo]:
         result= await self.client.query_points(collection_name=self.collection_name,
                                                query=embedding,

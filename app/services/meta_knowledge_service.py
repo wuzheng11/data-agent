@@ -12,7 +12,7 @@ from app.entities.metric_info import MetricInfo
 from app.entities.table_info import TableInfo
 from app.entities.value_info import ValueInfo
 from app.repository.es.value_es_repository import ValueESRepository
-from app.repository.mysql.dw.dw_mysql_repository import DWMySQLRepository
+from app.repository.mysql.dw.dw_mysql_repository import DWMysqlRepository
 from app.repository.mysql.meta.meta_mysql_repository import MetaMySQLRepository
 from app.repository.qdrant.column_qdrant_repository import ColumnQdrantRepository
 from app.repository.qdrant.metric_qdrant_repository import MetricQdrantRepository
@@ -22,7 +22,7 @@ class MetaKnowledgeService:
     def __init__(
             self,
             meta_mysql_repository: MetaMySQLRepository,
-            dw_mysql_repository: DWMySQLRepository,
+            dw_mysql_repository: DWMysqlRepository,
             column_qdrant_repository: ColumnQdrantRepository,
             embedding_client: HuggingFaceEndpointEmbeddings,
             value_es_repository: ValueESRepository,
