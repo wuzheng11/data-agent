@@ -9,7 +9,7 @@ from app.entities.column_info import ColumnInfo
 from app.prompt.prompt_loader import load_prompt
 
 
-async def racall_column(state: DataAgentState, runtime: Runtime[DataAgentContext]):
+async def recall_column(state: DataAgentState, runtime: Runtime[DataAgentContext]):
     writer = runtime.stream_writer
     writer({"type": "progress", "step": "召回字段", "status": "running"})
     query = state["query"]
