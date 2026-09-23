@@ -26,7 +26,7 @@ async def recall_metric(state: DataAgentState,runtime:Runtime[DataAgentContext])
 
         chain =prompt | llm | output_parser
 
-        result=chain.ainvoke({"query":query})
+        result= await chain.ainvoke({"query":query})
 
         #使用扩展后的关键词召回指标信息
         retrieved_metrics_map: dict[str,MetricInfo]={}

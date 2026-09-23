@@ -14,7 +14,7 @@ async def execute_sql(state:DataAgentState,runtime:Runtime[DataAgentContext]):
     try:
         result=await dw_mysql_repository.execute_sql(sql)
         writer({"type": "progress", "step": "执行sql", "status": "success"})
-        writer({"type":"result","date":result})
+        writer({"type":"result","data":result})
         logger.info(f"执行sql结果：{result}")
     except Exception as e:
         writer({"type": "progress", "step": "执行SQL", "status": "error"})

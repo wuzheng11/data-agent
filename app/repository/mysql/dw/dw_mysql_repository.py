@@ -18,7 +18,7 @@ class DWMysqlRepository:
 
     async def get_db_info(self):
         result=await self.session.execute(text("select version()"))
-        version=result.scalars()
+        version=result.scalar()
         dialect =self.session.get_bind().dialect.name
 
         return {'version':version,'dialect':dialect}

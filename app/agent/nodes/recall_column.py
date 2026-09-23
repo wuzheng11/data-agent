@@ -28,7 +28,7 @@ async def recall_column(state: DataAgentState, runtime: Runtime[DataAgentContext
 
         chain = prompt | llm | output_parser
 
-        result = await chain.invoke({"query": query})
+        result = await chain.ainvoke({"query": query})
 
         # 使用扩展后的关键词召回字段信息
         retrieved_columns_map: dict[str, ColumnInfo] = {}
@@ -46,7 +46,7 @@ async def recall_column(state: DataAgentState, runtime: Runtime[DataAgentContext
         retrieved_columns=list(retrieved_columns_map.values())
         writer({"type": "progress", "step": "召回字段", "status": "success"})
         logger.info(f"召回字段信息：{list(retrieved_columns_map.keys())}")
-        return {"retrived_columns":retrieved_columns}
+        return {"retrieved_columns":retrieved_columns}
     except Exception as e:
         writer({"type": "progress", "step": "召回字段", "status": "error"})
         logger.error(f"召回字段信息失败: {str(e)}")

@@ -40,4 +40,17 @@ async def generate_sql(state: DataAgentState,runtime: Runtime[DataAgentContext])
     except Exception as e:
         writer({"type": "progress", "step": "生成SQL", "status": "error"})
         logger.error(f"生成SQL失败: {str(e)}")
+
+        # logger.info(f"table_infos: {type(table_infos)}, 首元素: {type(table_infos[0]) if table_infos else None}")
+        # logger.info(f"metric_infos: {type(metric_infos)}, 首元素: {type(metric_infos[0]) if metric_infos else None}")
+        # logger.info(f"date_info: {type(date_info)}")
+        # logger.info(f"db_info: {type(db_info)}, value: {db_info}")
+        #
+        # # 逐个 yaml.dump，看哪个报错
+        # logger.info(yaml.dump(table_infos, allow_unicode=True, sort_keys=False))
+        # logger.info(yaml.dump(metric_infos, allow_unicode=True, sort_keys=False))
+        # logger.info(yaml.dump(date_info, allow_unicode=True, sort_keys=False))
+        # logger.info(yaml.dump(db_info, allow_unicode=True, sort_keys=False))
+
+
         raise
